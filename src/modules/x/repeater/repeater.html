@@ -1,0 +1,11 @@
+<template lwc:render-mode="light">
+    <h2>List of products</h2>
+
+    <template for:each={items} for:item="item">
+        <div key={item.id}>
+            <x-repeateditem item={item}>
+                <slot></slot>
+            </x-repeateditem>
+        </div>
+    </template>
+</template>

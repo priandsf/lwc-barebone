@@ -1,3 +1,10 @@
-<template>
+<template lwc:render-mode="light">
     <h1>Hello world</h1>
+
+    <button onclick={onclick}>Click me to refresh {clickCount}</button>
+    
+    <x-repeater>
+        <x-product></x-product>
+    </x-repeater>
+
 </template>
