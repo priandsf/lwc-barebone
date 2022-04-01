@@ -1,21 +1,27 @@
-import { LightningElement } from 'lwc';
-
-const PRODUCTS = [
-    {id: 1, description: 'A nice TV', price: 800},
-    {id: 2, description: 'A crappy phone', price: 50},
-    {id: 3, description: 'A good tablet', price: 450}
-]
+import { LightningElement, api } from 'lwc';
 
 export default class Repeater extends LightningElement {
     static renderMode = 'light';
 
-    clickCount = 0;
-
-    onclick() {
-        this.clickCount++;
-    }
+    @api products;
 
     get items() {
-        return PRODUCTS;
+        return this.products || []
+    }
+
+    connectedCallback() {
+        this.addEventListener( 'repeated_item', e=> {
+            e.detail.value = this.findItem(e.target) ;
+            e.stopPropagation()
+        });
+    }
+
+    findItem(e) {
+        for( ; e && e!=this; e=e.parentNode) {
+            const attr = e.attributes && e.attributes.getNamedItem("data-index")
+            if(attr) {
+                return this.items[parseInt(attr.value)];
+            }
+        }
     }
 }

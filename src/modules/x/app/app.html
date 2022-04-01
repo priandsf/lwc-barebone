@@ -1,9 +1,16 @@
 <template lwc:render-mode="light">
     <h1>Hello world</h1>
 
-    <button onclick={onclick}>Click me to refresh {clickCount}</button>
+    <div>
+        <button onclick={onclick}>Click me to refresh {clickCount}</button>
+    </div>
+
+    <div>
+        <button onclick={onpush}>Push Item</button>
+        <button onclick={onpop}>Pop Item</button>
+    </div>
     
-    <x-repeater>
+    <x-repeater products={products}>
         <x-product></x-product>
     </x-repeater>
 
